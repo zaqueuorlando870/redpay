@@ -7,7 +7,6 @@ For Banco Atlântico Demo - Proof of Concept Only
 import json
 import os
 import sys
-import tempfile
 import time
 import logging
 from datetime import datetime
@@ -53,13 +52,9 @@ class BankTransferAutomation:
         chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--window-size=1920,1080')
-        chrome_options.add_argument("--headless=new")
         chrome_options.add_argument('--disable-blink-features=AutomationControlled')
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False) 
-
-        user_data_dir = tempfile.mkdtemp(prefix="chrome_profile_")
-        chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
         
         # Enable remote debugging for session persistence
         chrome_options.add_argument('--remote-debugging-port=9222')

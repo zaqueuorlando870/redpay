@@ -45,8 +45,7 @@ class SessionManager:
                 'status': session_data.get('status', 'waiting_otp'),
                 'driver_session_id': session_data.get('driver_session_id'),
                 'automation_instance': session_data.get('automation_instance'),
-                'browser_pid': session_data.get('browser_pid'),
-                'driver_session_id': session_data.get('driver_session_id'),
+                'browser_pid': session_data.get('browser_pid'), 
                 'current_url': session_data.get('current_url'),
                 'otp_detected': session_data.get('otp_detected', False)
             }
