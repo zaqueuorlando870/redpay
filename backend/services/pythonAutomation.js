@@ -155,7 +155,9 @@ class PythonAutomationService {
       };
       
       // Spawn Python process
-      const pythonProcess = spawn('python3', [this.pythonScriptPath, JSON.stringify(inputData)]); 
+      // const pythonProcess = spawn('python3', [this.pythonScriptPath, JSON.stringify(inputData)]); 
+      const pythonProcess = spawn('/var/www/redpay/backend/venv/bin/python3', [this.pythonScriptPath, JSON.stringify(inputData)]);
+
 
       
       let outputData = '';
@@ -191,10 +193,6 @@ class PythonAutomationService {
               message: result.message
             });
             
-
-
-
-            
             // Store session if OTP is required
             if (result.requiresOtp && result.sessionId) {
               activeSessions.set(result.sessionId, {
@@ -218,18 +216,6 @@ class PythonAutomationService {
               });
               console.log(`🔐 Session ${result.sessionId} stored for OTP`);
             }
-
-
-
-
-
-
-
-
-
-
-            
-            
             resolve(result);
           } catch (parseError) {
             console.error('❌ Failed to parse Python output:', parseError);
