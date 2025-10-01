@@ -23,6 +23,7 @@ import uuid
 import sys
 import threading
 import queue
+import random
 
 from session_manager import session_manager
 
@@ -45,6 +46,24 @@ class BankTransferAutomation:
     def setup_driver(self):
         """Initialize Chrome WebDriver with appropriate options"""
         chrome_options = Options()
+
+        # Random IP rotation using proxy (if available)
+        proxy_list = [
+            "185.199.229.156:7492",
+            "185.199.228.220:7300", 
+            "185.199.231.45:8382",
+            "188.74.210.207:6286",
+            "188.74.210.21:6100",
+            "45.155.68.129:8133",
+            "154.95.36.199:6893",
+            "45.94.47.66:8110"
+        ]
+        
+        # Randomly select a proxy
+        if proxy_list:
+            selected_proxy = random.choice(proxy_list)
+            chrome_options.add_argument(f'--proxy-server=http://{selected_proxy}')
+            logger.info(f"🌐 Using proxy: {selected_proxy}")
         
         if self.headless:
             chrome_options.add_argument('--headless')
@@ -59,6 +78,17 @@ class BankTransferAutomation:
         chrome_options.add_argument('--disable-blink-features=AutomationControlled')
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
+
+        # Random user agent
+        user_agents = [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+        ]
+        selected_user_agent = random.choice(user_agents)
+        chrome_options.add_argument(f'--user-agent={selected_user_agent}')
+        logger.info(f"🎭 Using User-Agent: {selected_user_agent[:50]}...")
         
         # Enable remote debugging for session persistence
         chrome_options.add_argument('--remote-debugging-port=9222')
