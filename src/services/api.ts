@@ -1,6 +1,6 @@
 import { TransferRequest, TransferResponse } from '../types/bank';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://16.171.135.2:3001/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://pay.redmarket-on.com/api';
 
 console.log('🔧 API Base URL configured as:', API_BASE_URL);
 

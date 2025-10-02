@@ -14,7 +14,7 @@ const REAL_TRANSACTIONS = process.env.REAL_TRANSACTIONS === 'true';
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173',  'http://16.171.135.2:3000'],
+  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173',  'http://16.171.135.2:3000', 'https://pay.redmarket-on.com'],
   credentials: true
 }));
 app.use(express.json());
